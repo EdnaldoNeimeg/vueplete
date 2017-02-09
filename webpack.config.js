@@ -11,18 +11,12 @@ module.exports = {
     loaders: [
       {
         test: /\.vue$/,
-        loader: 'vue',
-        query: {
-          presets: ['es2015']
-        }
+        loader: 'vue'
       },
       {
         test: /\.js$/,
         loader: 'babel',
-        exclude: /node_modules/,
-        query: {
-          presets: ['es2015']
-        }
+        exclude: /node_modules/
       }
     ]
   },

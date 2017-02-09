@@ -1,6 +1,6 @@
 # Vueplete
 
-See a live demo [here](http://neimeg.github.io/vueplete/).
+See a live demo [here](http://ednaldoneimeg.github.io/vueplete/).
 
 ## Install
 

@@ -1,8 +1,24 @@
-import { util } from 'vue';
+'use strict';
 
-export default {
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _defineProperty2 = require('babel-runtime/helpers/defineProperty');
+
+var _defineProperty3 = _interopRequireDefault(_defineProperty2);
+
+var _assign = require('babel-runtime/core-js/object/assign');
+
+var _assign2 = _interopRequireDefault(_assign);
+
+var _vue = require('vue');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
   props: ['debounce'],
-  data() {
+  data: function data() {
     return {
       items: [],
       query: '',
@@ -14,22 +30,21 @@ export default {
     };
   },
 
+
   computed: {
-    hasItems() {
+    hasItems: function hasItems() {
       return this.items.length > 0;
     },
-
-    isEmpty() {
+    isEmpty: function isEmpty() {
       return !this.query;
     },
-
-    isDirty() {
+    isDirty: function isDirty() {
       return !!this.query;
     }
   },
 
   methods: {
-    update() {
+    update: function update() {
       var th = this;
       this.loading = true;
       if (this.debounce > 0) {
@@ -43,7 +58,9 @@ export default {
         this.fireFetch();
       }
     },
-    fireFetch() {
+    fireFetch: function fireFetch() {
+      var _this = this;
+
       if (!this.query) {
         this.loading = false;
         return this.reset();
@@ -54,60 +71,54 @@ export default {
         return;
       }
 
-      this.fetch().then(response => {
-        if (this.query) {
-          let data = response.data;
-          data = this.prepareResponseData ? this.prepareResponseData(data) : data;
-          this.items = this.limit ? data.slice(0, this.limit) : data;
-          this.current = -1;
-          this.loading = false;
+      this.fetch().then(function (response) {
+        if (_this.query) {
+          var data = response.data;
+          data = _this.prepareResponseData ? _this.prepareResponseData(data) : data;
+          _this.items = _this.limit ? data.slice(0, _this.limit) : data;
+          _this.current = -1;
+          _this.loading = false;
 
-          if (this.selectFirst) {
-            this.down();
+          if (_this.selectFirst) {
+            _this.down();
           }
         }
       });
     },
-
-    fetch() {
+    fetch: function fetch() {
       if (!this.$http) {
-        return util.warn('You need to install the `vue-resource` plugin', this);
+        return _vue.util.warn('You need to install the `vue-resource` plugin', this);
       }
 
       if (!this.src) {
-        return util.warn('You need to set the `src` property', this);
+        return _vue.util.warn('You need to set the `src` property', this);
       }
 
-      const src = this.queryParamName ? this.src : this.src + this.query;
+      var src = this.queryParamName ? this.src : this.src + this.query;
 
-      const params = this.queryParamName ? Object.assign({ [this.queryParamName]: this.query }, this.data) : this.data;
+      var params = this.queryParamName ? (0, _assign2.default)((0, _defineProperty3.default)({}, this.queryParamName, this.query), this.data) : this.data;
 
-      return this.$http.get(src, { params });
+      return this.$http.get(src, { params: params });
     },
-
-    reset() {
+    reset: function reset() {
       this.items = [];
       this.query = '';
       this.loading = false;
     },
-
-    setActive(index) {
+    setActive: function setActive(index) {
       this.current = index;
     },
-
-    activeClass(index) {
+    activeClass: function activeClass(index) {
       return {
         active: this.current === index
       };
     },
-
-    hit() {
+    hit: function hit() {
       if (this.current !== -1) {
         this.onHit(this.items[this.current]);
       }
     },
-
-    up() {
+    up: function up() {
       if (this.current > 0) {
         this.current--;
       } else if (this.current === -1) {
@@ -116,17 +127,15 @@ export default {
         this.current = -1;
       }
     },
-
-    down() {
+    down: function down() {
       if (this.current < this.items.length - 1) {
         this.current++;
       } else {
         this.current = -1;
       }
     },
-
-    onHit() {
-      util.warn('You need to implement the `onHit` method', this);
+    onHit: function onHit() {
+      _vue.util.warn('You need to implement the `onHit` method', this);
     }
   }
 };
