@@ -26,7 +26,8 @@ exports.default = {
       loading: false,
       selectFirst: false,
       queryParamName: 'q',
-      timer: null
+      timer: null,
+      showItems: false
     };
   },
 
@@ -78,6 +79,7 @@ exports.default = {
           _this.items = _this.limit ? data.slice(0, _this.limit) : data;
           _this.current = -1;
           _this.loading = false;
+          _this.showItems = true;
 
           if (_this.selectFirst) {
             _this.down();
@@ -101,8 +103,6 @@ exports.default = {
       return this.$http.get(src, { params: params });
     },
     reset: function reset() {
-      this.items = [];
-      this.query = '';
       this.loading = false;
     },
     setActive: function setActive(index) {
@@ -115,6 +115,8 @@ exports.default = {
     },
     hit: function hit() {
       if (this.current !== -1) {
+        this.reset();
+        this.showItems = false;
         this.onHit(this.items[this.current]);
       }
     },
@@ -136,6 +138,16 @@ exports.default = {
     },
     onHit: function onHit() {
       _vue.util.warn('You need to implement the `onHit` method', this);
+    },
+
+
+    onFocus: function onFocus() {
+      this.showItems = true;
+    },
+
+    onBlur: function onBlur() {
+      this.reset();
+      this.showItems = false;
     }
   }
 };

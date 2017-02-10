@@ -1,7 +1,11 @@
 {
   "name": "vueplete",
-  "version": "0.0.1",
-  "author": "Ednaldo Neimeg <neimeg@gmail.com>",
+  "version": "0.0.2",
+  "author": {
+    "name": "Ednaldo Neimeg",
+    "email": "neimeg@gmail.com"
+  },
+  "readmeFilename": "README.md",
   "license": "MIT",
   "description": "Autocomplete component for Vue.js",
   "keywords": [

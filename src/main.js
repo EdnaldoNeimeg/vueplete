@@ -11,6 +11,7 @@ export default {
       selectFirst: false,
       queryParamName: 'q',
       timer:null,
+      showItems:false,
     }
   },
 
@@ -59,6 +60,7 @@ export default {
           this.items = this.limit ? data.slice(0, this.limit) : data
           this.current = -1
           this.loading = false
+          this.showItems = true
 
           if (this.selectFirst) {
             this.down()
@@ -88,8 +90,6 @@ export default {
     },
 
     reset () {
-      this.items = []
-      this.query = ''
       this.loading = false
     },
 
@@ -105,6 +105,8 @@ export default {
 
     hit () {
       if (this.current !== -1) {
+        this.reset()
+        this.showItems = false;
         this.onHit(this.items[this.current])
       }
     },
@@ -129,6 +131,15 @@ export default {
 
     onHit () {
       util.warn('You need to implement the `onHit` method', this)
+    },
+
+    onFocus: function onFocus() {
+      this.showItems = true;
+    },
+
+    onBlur: function onBlur() {
+      this.reset();
+      this.showItems = false;
     }
   }
 }
