@@ -64,6 +64,8 @@ exports.default = {
 
       if (!this.query) {
         this.loading = false;
+        this.showItems = false;
+        this.items = [];
         return this.reset();
       }
 
