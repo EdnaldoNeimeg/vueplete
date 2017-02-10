@@ -17,7 +17,7 @@ var _vue = require('vue');
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-  props: ['debounce'],
+  props: ['debounce', 'value'],
   data: function data() {
     return {
       items: [],
@@ -29,6 +29,11 @@ exports.default = {
       timer: null,
       showItems: false
     };
+  },
+  created: function created() {
+    if (this.value) {
+      this.query = this.value;
+    }
   },
 
 

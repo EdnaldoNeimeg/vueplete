@@ -1,7 +1,7 @@
 import { util } from 'vue'
 
 export default {
-  props:['debounce'],
+  props:['debounce','value'],
   data () {
     return {
       items: [],
@@ -12,6 +12,12 @@ export default {
       queryParamName: 'q',
       timer:null,
       showItems:false,
+    }
+  },
+
+  created(){
+    if(this.value){
+      this.query = this.value;
     }
   },
 
